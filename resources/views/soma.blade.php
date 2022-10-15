@@ -8,6 +8,6 @@
     <title>Soma de dois valores</title>
 </head>
 <body>
-<h1>A soma  é : {{$soma}}</h1>
+    <h1>A soma e: {{$soma}}</h1>
 </body>
 </html>

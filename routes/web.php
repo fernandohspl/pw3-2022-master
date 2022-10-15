@@ -18,11 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/hello-world', function () {
-    return ('HELLO WORLD!!');
+    return 'Hello World!';
 });
 
-Route::get('/hello-world/{nome}', [\App\Http\Controllers\TesteController::class,'mostrarNome']);
+Route::get('/hello-world/{nome}', [\App\Http\Controllers\TesteController::class, 'mostrarNome']);
+Route::get('/soma/{n1}/{n2}', [\App\Http\Controllers\TesteController::class, 'soma']);
 
-Route::get('/soma/{n1}/{n2}', [\App\Http\Controllers\TesteController::class,'soma']);
-
-Route::resource('categorias',\App\Http\Controllers\CategoriaController::class);
+Route::resource('categorias', \App\Http\Controllers\CategoriaController::class);
+Route::resource('subcategorias', \App\Http\Controllers\SubcategoriaController::class);
+Route::resource('produtos', \App\Http\Controllers\ProdutoController::class);
