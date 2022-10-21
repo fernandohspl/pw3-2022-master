@@ -13,17 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/hello-world/{nome}', [\App\Http\Controllers\TesteController::class, 'mostrarNome']);
+Route::get('/soma/{n1}/{n2}', [\App\Http\Controllers\TesteController::class, 'soma']);
+
+Route::resource('categorias', \App\Http\Controllers\CategoriaController::class)->middleware(['auth', 'verified']);
+Route::resource('subcategorias', \App\Http\Controllers\SubcategoriaController::class)->middleware(['auth', 'verified']);
+Route::resource('produtos', \App\Http\Controllers\ProdutoController::class)->middleware(['auth', 'verified']);
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello-world', function () {
-    return 'Hello World!';
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/hello-world/{nome}', [\App\Http\Controllers\TesteController::class, 'mostrarNome']);
-Route::get('/soma/{n1}/{n2}', [\App\Http\Controllers\TesteController::class, 'soma']);
-
-Route::resource('categorias', \App\Http\Controllers\CategoriaController::class);
-Route::resource('subcategorias', \App\Http\Controllers\SubcategoriaController::class);
-Route::resource('produtos', \App\Http\Controllers\ProdutoController::class);
+require __DIR__.'/auth.php';
