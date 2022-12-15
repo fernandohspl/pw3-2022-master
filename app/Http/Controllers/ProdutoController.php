@@ -108,4 +108,39 @@ class ProdutoController extends Controller
         $produto->delete();
         return redirect()->route('produtos.index');
     }
+/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Produto  $produto
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Produto $produto)
+    {
+        //
+        $this->deleteProductImage($produto->imagem);
+        Produto::destroy($produto->id);
+        return redirect()->route('produtos.index');
+    }
+
+    private function storeProductImage($image)
+    {
+        $timestamp = date('YmdHis');
+
+        $originalExtension = $image->extension();
+        $newName = "{$timestamp}.{$originalExtension}";
+
+        $image->storeAs('public/produtos', $newName);
+
+        return $newName;
+    }
+
+    private function deleteProductImage($imageName)
+    {
+        $imagePath = "public/produtos/{$imageName}";
+
+        if (Storage::exists($imagePath))
+        {
+            Storage::delete($imagePath);
+        }
+    }
 }

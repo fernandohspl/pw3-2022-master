@@ -39,7 +39,20 @@ Route::put('vitrine/carrinho', [\App\Http\Controllers\CarrinhoComprasController:
 Route::get('vitrine/carrinho/clear', [\App\Http\Controllers\CarrinhoComprasController::class, 'limparCarrinho'])->name('vitrine.clearcarrinho');
 //FIM CARRINHO DE COMPRAS
 
+//GERENCIAMENTO DO CLIENTE
+Route::get('vitrine/cliente/create',[\App\Http\Controllers\ClientController::class,'create'])->name('cliente.create');
+Route::post('vitrine/cliente/',[\App\Http\Controllers\ClientController::class,'store'])->name('cliente.store');
+Route::get('vitrie cliente/login',[\App\Http\Controllers\ClientController::class,'createLogin'])->name('cliente.login.create');
+Route::post('vitrie cliente/login',[\App\Http\Controllers\ClientController::class,'login'])->name('cliente.login');
+Route::get('vitrie cliente/logout',[\App\Http\Controllers\ClientController::class,'logout'])->name('cliente.logout');
 
+//FIM
+
+//FINALIZAR PEDIDO
+Route::get('vitrine/pedido/checar',[\App\Http\Controllers\PedidoController::class,'checarPedido'])->name('pedido.checar');
+Route::get('vitrine/pedido/finalizar',[\App\Http\Controllers\PedidoController::class,'finalizarPedido'])->name('pedido.finalizar');
+
+//FIM
 Route::resource('categorias', \App\Http\Controllers\CategoriaController::class)->middleware(['auth', 'verified']);
 Route::resource('subcategorias', \App\Http\Controllers\SubcategoriaController::class)->middleware(['auth', 'verified']);
 Route::resource('produtos', \App\Http\Controllers\ProdutoController::class)->middleware(['auth', 'verified']);

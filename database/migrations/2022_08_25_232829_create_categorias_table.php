@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('produtos', function (Blueprint $table){
-            $table->string('imagem', 150)->nullable();
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome', 30);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('produtos', 'imagem');
+        Schema::dropIfExists('categorias');
     }
 };
